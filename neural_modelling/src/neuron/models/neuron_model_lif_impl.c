@@ -56,8 +56,8 @@ state_t neuron_model_state_update(
 void neuron_model_has_spiked(neuron_pointer_t neuron) {
 
     // reset membrane voltage
-    neuron->V_membrane = neuron->V_reset;
-
+    neuron->V_membrane = neuron->V_membrane - neuron->V_reset;
+    //neuron->V_membrane = neuron->V_reset;
     // reset refractory timer
     neuron->refract_timer  = neuron->T_refract;
 }
