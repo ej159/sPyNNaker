@@ -42,8 +42,10 @@ enum word_recording_indices {
     GSYN_EXC_RECORDING_INDEX = 1,
     //! Gsyn_inh (excitatory synaptic conductance/current) recording index
     GSYN_INH_RECORDING_INDEX = 2,
+    //! threshold recording index
+    THRESHOLD_RECORDING_INDEX = 3,
     //! Number of recorded word-sized state variables
-    N_RECORDED_VARS = 3
+    N_RECORDED_VARS = 4
 };
 
 //! Indices for recording of bitfields
@@ -268,6 +270,7 @@ static void neuron_impl_do_timestep_update(
         for (uint32_t i_step = n_steps_per_timestep; i_step > 0; i_step--) {
             // Get the voltage
             state_t soma_voltage = neuron_model_get_membrane_voltage(this_neuron);
+            state_t threshold = the_threshold_type->threshold_value;
 
             // Get the exc and inh values from the synapses
             input_t exc_values[NUM_EXCITATORY_RECEPTORS];
@@ -302,6 +305,8 @@ static void neuron_impl_do_timestep_update(
                         GSYN_EXC_RECORDING_INDEX, neuron_index, total_exc);
                 neuron_recording_record_accum(
                         GSYN_INH_RECORDING_INDEX, neuron_index, total_inh);
+                neuron_recording_record_accum(
+                        THRESHOLD_RECORDING_INDEX, neuron_index, threshold);
             }
 
             // Call functions to convert exc_input and inh_input to current

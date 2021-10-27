@@ -46,18 +46,20 @@ class NeuronImplStandard(AbstractNeuronImpl):
         "__n_steps_per_timestep"
     ]
 
-    _RECORDABLES = ["v", "gsyn_exc", "gsyn_inh"]
+    _RECORDABLES = ["v", "gsyn_exc", "gsyn_inh", "threshold"]
 
     _RECORDABLE_DATA_TYPES = {
         "v": DataType.S1615,
         "gsyn_exc": DataType.S1615,
-        "gsyn_inh": DataType.S1615
+        "gsyn_inh": DataType.S1615,
+        "threshold": DataType.S1615
     }
 
     _RECORDABLE_UNITS = {
         'v': 'mV',
         'gsyn_exc': "uS",
-        'gsyn_inh': "uS"}
+        'gsyn_inh': "uS",
+        'threshold': 'mV'}
 
     def __init__(
             self, model_name, binary, neuron_model, input_type,
