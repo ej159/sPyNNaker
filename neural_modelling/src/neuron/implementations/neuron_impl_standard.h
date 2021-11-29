@@ -326,7 +326,7 @@ static void neuron_impl_do_timestep_update(
 
             // determine if a spike should occur
             bool spike_now =
-                    threshold_type_is_above_threshold(result, the_threshold_type);
+                    threshold_type_is_above_threshold(result, this_neuron, the_threshold_type);
 
             // If spike occurs, communicate to relevant parts of model
             if (spike_now) {
